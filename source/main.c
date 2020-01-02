@@ -1,6 +1,8 @@
 /*
- * Template Nintendo DS
- * May 2011
+ * main.c
+ *
+ *  Created on: Jan 2, 2020
+ *      Author: Karim
  */
 
 #include <nds.h>
