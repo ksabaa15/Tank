@@ -7,12 +7,12 @@
 
 #include <nds.h>
 #include <stdio.h>
-
+#include "game.h"
 int main(void) {
-	
-    consoleDemoInit();
-    printf("\nTemplate nds\n");
 
-    while(1)
-        swiWaitForVBlank();	
+	polling();
+	update_game();
+	draw();
+	while(1)
+		swiWaitForVBlank();
 }
