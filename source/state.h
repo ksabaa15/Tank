@@ -7,7 +7,9 @@
 #pragma once
 
 typedef struct {
-    void (*update)();
-	void (*draw)();
+    // prevent subsequent update/draw calls for older states by returning anything != 0
+    // for example, the pause menu state's update() will return 1 so that it pauses other states
+    int (*update)();
+	int (*draw)();
 } State;
 
