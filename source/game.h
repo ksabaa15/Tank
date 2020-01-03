@@ -4,24 +4,20 @@
  *  Created on: Jan 2, 2020
  *      Author: Karim
  */
+#pragma once
+
 #include <nds.h>
-#include "background.h"
+
+#include "state.h"
 #include "graphics.h"
+
+#include "background.h"
 #include "sprites.h"
-/*
- * #Under Construction#
- * Checks for user input
- */
-void polling();
 
-/*
- * #under Construction
- * Updates the game logic state
- */
-void update_game();
+extern State STATE_GAME;
 
-/*
- * #under construction#
- * draw the game
- */
-void draw();
+int update_game();
+int draw_game();
+int init_game();
+int deinit_game();
+
