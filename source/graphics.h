@@ -4,6 +4,8 @@
  *  Created on: Jan 2, 2020
  *      Author: Karim
  */
+#pragma once
+
 #include <nds.h>
 typedef struct{
 	void * palette;

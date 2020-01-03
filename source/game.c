@@ -6,9 +6,14 @@
  */
 #include "game.h"
 
-void polling(){};
+State STATE_GAME = {
+	&init_game,
+	&deinit_game,
+	&update_game,
+	&draw_game
+};
 
-void update_game(){
+int init_game() {
 
 	Illustration background = { backgroundPal, backgroundTiles,backgroundMap, backgroundPalLen, backgroundTilesLen, backgroundMapLen };
 
@@ -31,5 +36,26 @@ void update_game(){
 	u16* gfx_tank_sub = allocate_sprite_sub(SpriteSize_32x32,tank,&id_tank);
 	set_sprite_sub(gfx_tank_sub, id_tank, 100, 110,false);
 
+	return 0;
 }
-void draw(){};
+
+int deinit_game() {
+
+	// TODO:
+
+	return 0;
+}
+
+int update_game() {
+
+	// TODO:
+
+	return 0;
+}
+
+int draw_game() {
+
+	// TODO:
+
+	return 0;
+}

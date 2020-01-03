@@ -4,6 +4,7 @@
  *  Created on: Jan 2, 2020
  *      Author: Ulysse
  */
+#pragma once
 
 /*!
  * @brief Takes control of the touch screen and posts the game menu
