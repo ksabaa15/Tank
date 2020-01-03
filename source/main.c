@@ -5,9 +5,9 @@
  *      Author: Karim
  */
 
-#include <nds.h>
 #include <stdio.h>
 #include "game.h"
+#include "input.h"
 #include "state_manager.h"
 
 int main(void) {
@@ -21,7 +21,7 @@ int main(void) {
 
 	while (1) {
 		// game loop
-		polling();
+		poll_input();
 		state_manager_update(&state_manager);
 		state_manager_draw(&state_manager);
 		swiWaitForVBlank();
