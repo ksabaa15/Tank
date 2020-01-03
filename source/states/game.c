@@ -7,11 +7,13 @@
 #include "game.h"
 
 State STATE_GAME = {
+	&init_game,
+	&deinit_game,
 	&update_game,
 	&draw_game
 };
 
-void update_game() {
+int init_game() {
 
 	Illustration background = { backgroundPal, backgroundTiles,backgroundMap, backgroundPalLen, backgroundTilesLen, backgroundMapLen };
 
@@ -30,8 +32,26 @@ void update_game() {
 	set_sprite_main(gfx_tank1, id_tank, 10, 110,false);
 	set_sprite_main(gfx_target_mark, id_target_mark, 25, 108,false);
 
+	return 0;
 }
 
-void draw_game() {
+int deinit_game() {
 
+	// TODO:
+
+	return 0;
+}
+
+int update_game() {
+
+	// TODO:
+
+	return 0;
+}
+
+int draw_game() {
+
+	// TODO:
+
+	return 0;
 }

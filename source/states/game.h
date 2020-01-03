@@ -14,14 +14,8 @@
 
 extern State STATE_GAME;
 
-/*
- * #under Construction
- * Updates the game logic state
- */
-void update_game();
+int update_game();
+int draw_game();
+int init_game();
+int deinit_game();
 
-/*
- * #under construction#
- * draw the game
- */
-void draw_game();
