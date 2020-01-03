@@ -7,9 +7,11 @@
 #pragma once
 
 #include <nds.h>
+
 #include "state.h"
-#include "background.h"
 #include "graphics.h"
+
+#include "background.h"
 #include "sprites.h"
 
 extern State STATE_GAME;
