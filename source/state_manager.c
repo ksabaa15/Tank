@@ -20,6 +20,7 @@ int state_manager_push(StateManager *state_manager, State *state) {
     for (int i = 0; i < MAX_STATES; ++i) {
         if (state_manager->stack[i] == NULL) {
             state_manager->stack[i] = state;
+            state->init();
             return 0;
         }
     }
@@ -32,6 +33,7 @@ State* state_manager_pop(StateManager *state_manager) {
         if (state_manager->stack[i] != NULL) {
             State *state = state_manager->stack[i];
             state_manager->stack[i] = NULL;
+            state->deinit();
             return state;
         }
     }
