@@ -47,6 +47,11 @@ void configure_sprites_main(){
 	VRAM_B_CR = VRAM_ENABLE |VRAM_B_MAIN_SPRITE_0x06400000;
 	oamInit(&oamMain, SpriteMapping_1D_32,false);
 }
+void configure_sprites_sub(){
+	VRAM_I_CR = VRAM_ENABLE | VRAM_I_SUB_SPRITE;
+	oamInit(&oamSub, SpriteMapping_1D_32,false);
+}
+
 void* allocate_sprite_main(SpriteSize s, Illustration sprite, int *id){
 	// allocate sprite
 	u16* gfx= oamAllocateGfx(&oamMain, s, SpriteColorFormat_256Color);
@@ -56,10 +61,25 @@ void* allocate_sprite_main(SpriteSize s, Illustration sprite, int *id){
 	// copying tiles
 	dmaCopy(sprite.tiles,(void*)gfx,sprite.tiles_length);
 
-	*id= sprite_id++;
+	*id= sprite_id_main++;
 
 	return gfx;
 }
+
+void* allocate_sprite_sub(SpriteSize s, Illustration sprite, int *id){
+	// allocate sprite
+	u16* gfx_sub= oamAllocateGfx(&oamSub, s, SpriteColorFormat_256Color);
+	// copying palette
+	dmaCopy(sprite.palette,(void*)SPRITE_PALETTE_SUB,sprite.palette_length);
+
+	// copying tiles
+	dmaCopy(sprite.tiles,(void*)gfx_sub,sprite.tiles_length);
+
+	*id= sprite_id_sub++;
+
+	return gfx_sub;
+}
+
 
 void set_sprite_main(const void* gfx, int id,int x, int y, bool horizontal_flip){
 	oamSet(&oamMain,
@@ -70,7 +90,7 @@ void set_sprite_main(const void* gfx, int id,int x, int y, bool horizontal_flip)
 						SpriteSize_32x32,
 						SpriteColorFormat_256Color,
 						gfx,
-						0,
+						-1,
 						false,
 						false,
 						horizontal_flip, false,
@@ -78,4 +98,24 @@ void set_sprite_main(const void* gfx, int id,int x, int y, bool horizontal_flip)
 						);
 
 			oamUpdate(&oamMain);
+}
+
+
+void set_sprite_sub(const void* gfx_sub, int id,int x, int y, bool horizontal_flip){
+	oamSet(&oamSub,
+						id,
+						x,y,
+						0,
+						0,
+						SpriteSize_32x32,
+						SpriteColorFormat_256Color,
+						gfx_sub,
+						-1,
+						false,
+						false,
+						horizontal_flip, false,
+						false
+						);
+
+			oamUpdate(&oamSub);
 }

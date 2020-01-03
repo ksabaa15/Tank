@@ -38,8 +38,11 @@ void set_background_sub_screen(Illustration background);
  */
 void configure_sprites_main();
 
+void configure_sprites_sub();
 // global variable to keep track of the last sprite id number
-static int sprite_id=0;
+static int sprite_id_main=0;
+static int sprite_id_sub=0;
+
 /*
  *@brief Allocates graphics memory for the supplied sprite attributes,
  *		 copy the sprite tiles and palette ( WARNING: a unique palette,
@@ -56,8 +59,10 @@ static int sprite_id=0;
  *@return *gfx, the address in vram of the allocated sprite (*gfx)
  */
 void* allocate_sprite_main(SpriteSize s, Illustration sprite, int *id);
+void* allocate_sprite_sub(SpriteSize s, Illustration sprite, int *id);
 
 /*
  *
  */
 void set_sprite_main(const void* gfx, int id,int x, int y, bool horizontal_flip);
+void set_sprite_sub(const void* gfx, int id,int x, int y, bool horizontal_flip);
