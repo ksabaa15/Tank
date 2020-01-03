@@ -6,9 +6,12 @@
  */
 #include "game.h"
 
-void polling(){};
+State STATE_GAME = {
+	&update_game,
+	&draw_game
+};
 
-void update_game(){
+void update_game() {
 
 	Illustration background = { backgroundPal, backgroundTiles,backgroundMap, backgroundPalLen, backgroundTilesLen, backgroundMapLen };
 
@@ -28,4 +31,7 @@ void update_game(){
 	set_sprite_main(gfx_target_mark, id_target_mark, 25, 108,false);
 
 }
-void draw(){};
+
+void draw_game() {
+
+}

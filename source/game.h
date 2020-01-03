@@ -5,14 +5,12 @@
  *      Author: Karim
  */
 #include <nds.h>
+#include "state.h"
 #include "background.h"
 #include "graphics.h"
 #include "sprites.h"
-/*
- * #Under Construction#
- * Checks for user input
- */
-void polling();
+
+extern State STATE_GAME;
 
 /*
  * #under Construction
@@ -24,4 +22,4 @@ void update_game();
  * #under construction#
  * draw the game
  */
-void draw();
+void draw_game();
