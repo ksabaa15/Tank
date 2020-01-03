@@ -17,7 +17,8 @@ int state_manager_init(StateManager *state_manager) {
 
 int state_manager_push(StateManager *state_manager, State *state) {
     if (state_manager == NULL || state == NULL) return -1;
-    for (int i = 0; i < MAX_STATES; ++i) {
+    int i;
+    for (i = 0; i < MAX_STATES; ++i) {
         if (state_manager->stack[i] == NULL) {
             state_manager->stack[i] = state;
             state->init();
@@ -29,7 +30,8 @@ int state_manager_push(StateManager *state_manager, State *state) {
 
 State* state_manager_pop(StateManager *state_manager) {
     if (state_manager == NULL) return NULL;
-    for (int i = MAX_STATES-1; i <= 0; --i) {
+    int i;
+    for (i = MAX_STATES-1; i <= 0; --i) {
         if (state_manager->stack[i] != NULL) {
             State *state = state_manager->stack[i];
             state_manager->stack[i] = NULL;
@@ -42,7 +44,8 @@ State* state_manager_pop(StateManager *state_manager) {
 
 int state_manager_update(StateManager *state_manager) {
     if (state_manager == NULL) return -1;
-    for (int i = MAX_STATES-1; i <= 0; --i) {
+    int i;
+    for (i= MAX_STATES-1; i <= 0; --i) {
         State *state = state_manager->stack[i];
         if (state != NULL) {
             if ((state->update)() != 0) break; // block subsequent update calls
@@ -53,7 +56,8 @@ int state_manager_update(StateManager *state_manager) {
 
 int state_manager_draw(StateManager *state_manager) {
     if (state_manager == NULL) return -1;
-    for (int i = MAX_STATES-1; i <= 0; --i) {
+    int i;
+    for (i = MAX_STATES-1; i <= 0; --i) {
         State *state = state_manager->stack[i];
         if (state != NULL) {
             if ((state->draw)() != 0) break; // block subsequent draw calls
