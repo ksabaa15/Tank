@@ -5,6 +5,8 @@
  *      Author: Ulysse
  */
 #pragma once
+#ifndef MAIN_MENU_H_
+#define MAIN_MENU_H_
 
 /*!
  * @brief Takes control of both screen and posts on the upper screen an image
@@ -18,3 +20,5 @@
  *        or other.
  */
 int main_menu();
+
+#endif /* MAIN_MENU_H_ */

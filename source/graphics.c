@@ -5,9 +5,6 @@
  *      Author: Karim
  */
 #include "graphics.h"
-#include <math.h>
-#define degrees(a) (a*M_PI/180.0)
-#define radians(a) (a*180.0/M_PI)
 
 
 void set_background_main_screen(Illustration background){
@@ -81,7 +78,7 @@ void* allocate_sprite_sub(SpriteSize s, Illustration sprite, int *id){
 }
 
 
-void set_sprite_main(const void* gfx, int id,int x, int y, bool horizontal_flip){
+void set_sprite_main(const void* gfx, int id,int x, int y){
 	oamSet(&oamMain,
 						id,
 						x,y,
@@ -93,7 +90,7 @@ void set_sprite_main(const void* gfx, int id,int x, int y, bool horizontal_flip)
 						-1,
 						false,
 						false,
-						horizontal_flip, false,
+						false, false,
 						false
 						);
 
@@ -101,7 +98,7 @@ void set_sprite_main(const void* gfx, int id,int x, int y, bool horizontal_flip)
 }
 
 
-void set_sprite_sub(const void* gfx_sub, int id,int x, int y, bool horizontal_flip){
+void set_sprite_sub(const void* gfx_sub, int id,int x, int y){
 	oamSet(&oamSub,
 						id,
 						x,y,
@@ -113,7 +110,7 @@ void set_sprite_sub(const void* gfx_sub, int id,int x, int y, bool horizontal_fl
 						-1,
 						false,
 						false,
-						horizontal_flip, false,
+						false, false,
 						false
 						);
 
