@@ -10,10 +10,10 @@
 
 #include "state.h"
 #include "game.h"
-#include "background.h"
 #include "terrain.h"
 #include "tanks.h"
-
+#include "sound.h"
+#include <nds.h>
 extern State STATE_GAME;
 
 int update_game();

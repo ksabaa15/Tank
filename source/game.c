@@ -20,12 +20,23 @@ int init_game() {
 	terrain_draw(terrain);
 
 	configure_sprites_main();
-
 	Tank tank_green, tank_red;
 	tank_init(&tank_green,LEFT_TANK, 10, terrain);
 	tank_init(&tank_red,RIGHT_TANK, 200, terrain);
 	draw_tank(tank_green);
 	draw_tank(tank_red);
+
+	configure_sound();
+
+	while(1){
+		swiWaitForVBlank();
+		scanKeys();
+		int keys = keysHeld();
+		if(keys==KEY_A){
+			tank_shoot(tank_green,60, terrain);
+			break;
+		}
+	}
 
 	return 0;
 }

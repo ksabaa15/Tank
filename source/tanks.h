@@ -11,6 +11,7 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "graphics.h"
+#include "cannon_ball.h"
 #define HEALTH_START_VALUE 5
 
 // defines which tank, the game will support only two tanks (1 vs 1)
@@ -46,7 +47,7 @@ typedef struct{
 int tank_init(Tank*,Tank_id, int x, Terrain);
 
 /*!
- * @brief moves the tank number(id) to the new location
+ * @brief moves the tank to the new location
  * fails if - the tank pointer is null
  * 			-x is out of the terrain [0-255]
  * @param tank to be moved
@@ -60,13 +61,13 @@ int tank_move(Tank* tank, int x);
  *       with the given power and angle
  * @param tank that is going to shoot
  * @param power of the shot [0-100]
- * @param angle of shot, relative to which direction the tank is looking
+ * @param angle of shot [0-90], relative to which tank, they look to different directions
  */
-void tank_shoot(Tank tank, int power, int angle);
+void tank_shoot(Tank tank, int angle, Terrain terrain);
 
 /*!
  *@brief when the tank gets hit, it looses health
- *       and makes an explosion animation.
+ *       and might end the game
  * @param tank that is going to get hit
  */
 void tank_got_hit(Tank tank);

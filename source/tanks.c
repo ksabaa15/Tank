@@ -45,3 +45,7 @@ void draw_tank(Tank tank){
 	set_sprite_main(tank.gfx_tank, tank.sprite_id, tank.x, tank.y);
 
 }
+
+void tank_shoot(Tank tank, int angle, Terrain terrain){
+	cannon_shoot(tank.x,tank.y, angle, terrain);
+}
