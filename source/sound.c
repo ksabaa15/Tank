@@ -15,9 +15,6 @@ void configure_sound(){
 void cannon_sound(){
 	mmEffect(SFX_CANNON);
 }
-void cannon_sound_over(){
-	mmEffectCancel(SFX_CANNON);
-}
 
 
 void explosion_sound(){
@@ -25,6 +22,3 @@ void explosion_sound(){
 }
 
 
-void explosion_sound_over(){
-	mmEffectCancel(SFX_EXPLOSION);
-}

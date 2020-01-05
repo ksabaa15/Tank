@@ -8,8 +8,9 @@
 #include "input.h"
 
 int poll_input() {
-
-    // TODO: poll key presses, touch...
-
+		scanKeys();
+		keys=keysHeld();
+		swiWaitForVBlank();
+		touchRead(&touch);
     return 0;
 }

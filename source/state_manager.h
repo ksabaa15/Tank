@@ -16,6 +16,7 @@ typedef struct {
     State *stack[MAX_STATES];
 } StateManager;
 
+StateManager state_manager;
 /*!
  * @brief Initializes a state manager
  * @param state_manager pointer to the state stack

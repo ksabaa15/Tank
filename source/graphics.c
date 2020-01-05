@@ -7,7 +7,7 @@
 #include "graphics.h"
 
 
-void set_background_main_screen(Illustration background){
+void configure_background_main(){
 
 	// configure Vram for main engine
 	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
@@ -16,15 +16,20 @@ void set_background_main_screen(Illustration background){
 	// configure the background controller
 	BGCTRL[0]= BG_32x32 | BG_COLOR_256 |
 			BG_MAP_BASE(0) | BG_TILE_BASE(1);
+
+
+}
+void draw_background_main(Illustration background){
 	// copying palette
 	dmaCopy(background.palette,(void*)BG_PALETTE,background.palette_length);
 	// copying tiles
 	dmaCopy(background.tiles,(void*)BG_TILE_RAM(1),background.tiles_length);
 	// copying map
 	dmaCopy(background.map,(void*)BG_MAP_RAM(0),background.map_length);
+
 }
 
-void set_background_sub_screen(Illustration background){
+void configure_background_sub(){
 	// configure Vram for main engine
 	VRAM_C_CR = VRAM_ENABLE | VRAM_C_SUB_BG;
 	// configure the display controller register
@@ -32,6 +37,8 @@ void set_background_sub_screen(Illustration background){
 	// configure the background controller
 	BGCTRL_SUB[0]= BG_32x32 | BG_COLOR_256 |
 			BG_MAP_BASE(0) | BG_TILE_BASE(1);
+}
+void draw_background_sub(Illustration background){
 	// copying palette
 	dmaCopy(background.palette,(void*)BG_PALETTE_SUB,background.palette_length);
 	// copying tiles
@@ -61,6 +68,12 @@ void* allocate_sprite_main(SpriteSize s, Illustration sprite, int *id){
 	*id= sprite_id_main++;
 
 	return gfx;
+}
+void deallocate_sprite_main(void* gfx){
+	oamFreeGfx(&oamMain, gfx);
+}
+void deallocate_sprite_sub(void * gfx){
+	oamFreeGfx(&oamSub,gfx);
 }
 
 void* allocate_sprite_sub(SpriteSize s, Illustration sprite, int *id){
@@ -94,7 +107,6 @@ void set_sprite_main(const void* gfx, int id,int x, int y){
 						false
 						);
 
-			oamUpdate(&oamMain);
 }
 
 
@@ -115,4 +127,12 @@ void set_sprite_sub(const void* gfx_sub, int id,int x, int y){
 						);
 
 			oamUpdate(&oamSub);
+}
+
+void draw_sprite_main(){
+	oamUpdate(&oamMain);
+}
+
+void draw_sprite_sub(){
+	oamUpdate(&oamSub);
 }

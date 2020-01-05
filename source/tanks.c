@@ -17,7 +17,7 @@ int tank_init(Tank* tank ,Tank_id id, int x, Terrain terrain){
 	}
 	tank->id = id;
 	tank->x = x;
-	tank->y=  terrain.func(x);
+	tank->y=  terrain.func(x)-32;
 	tank->health= HEALTH_START_VALUE;
 	if(id == LEFT_TANK){
 		tank->illustration= left_tank_illustartion;
@@ -46,6 +46,13 @@ void draw_tank(Tank tank){
 
 }
 
-void tank_shoot(Tank tank, int angle, Terrain terrain){
-	cannon_shoot(tank.x,tank.y, angle, terrain);
+
+void tank_shoot(Tank shooter, Tank target,int angle, Terrain terrain){
+	cannon_shoot( shooter, target, tank_got_hit, angle, terrain);
 }
+
+void tank_got_hit(Tank tank){
+
+}
+
+

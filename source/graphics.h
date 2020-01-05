@@ -31,7 +31,7 @@ typedef struct{
  * 			the tiles in BG_TILE_RAM_SUB(1)
  * @param b the background to set
  */
-void set_background_main_screen(Illustration background);
+void configure_background_main();
 
 /*!
  * @brief Sets the upper screen with a given background,
@@ -40,7 +40,10 @@ void set_background_main_screen(Illustration background);
  * 			the tiles in BG_TILE_RAM(1)
  * @param b the background to set
  */
-void set_background_sub_screen(Illustration background);
+void configure_background_sub();
+
+void draw_background_main(Illustration background);
+void draw_background_sub(Illustration background);
 
 /*
  *@brief Initializes the 2D sprite engine and enables the Vram B
@@ -70,11 +73,16 @@ static int sprite_id_sub=0;
  */
 void* allocate_sprite_main(SpriteSize s, Illustration sprite, int *id);
 void* allocate_sprite_sub(SpriteSize s, Illustration sprite, int *id);
+void deallocate_sprite_main(void* gfx);
+void deallocate_sprite_sub(void* gfx);
 
 /*
  *
  */
 void set_sprite_main(const void* gfx, int id,int x, int y);
 void set_sprite_sub(const void* gfx, int id,int x, int y);
+
+void draw_sprite_main();
+void draw_sprite_sub();
 
 #endif /* GRAPHICS_H_ */

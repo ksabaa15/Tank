@@ -11,7 +11,7 @@
 
 int state_manager_init(StateManager *state_manager) {
     if (state_manager == NULL) return -1;
-    memset(state_manager->stack, 0, sizeof(StateManager*) * MAX_STATES); // fill stack with NULL pointers
+    memset(state_manager->stack, 0, sizeof(State*) * MAX_STATES); // fill stack with NULL pointers
     return 0;
 }
 
@@ -31,7 +31,7 @@ int state_manager_push(StateManager *state_manager, State *state) {
 State* state_manager_pop(StateManager *state_manager) {
     if (state_manager == NULL) return NULL;
     int i;
-    for (i = MAX_STATES-1; i <= 0; --i) {
+    for (i = MAX_STATES-1; i >= 0; --i) {
         if (state_manager->stack[i] != NULL) {
             State *state = state_manager->stack[i];
             state_manager->stack[i] = NULL;
@@ -45,7 +45,7 @@ State* state_manager_pop(StateManager *state_manager) {
 int state_manager_update(StateManager *state_manager) {
     if (state_manager == NULL) return -1;
     int i;
-    for (i= MAX_STATES-1; i <= 0; --i) {
+    for (i= MAX_STATES-1; i >= 0; --i) {
         State *state = state_manager->stack[i];
         if (state != NULL) {
             if ((state->update)() != 0) break; // block subsequent update calls
@@ -57,7 +57,7 @@ int state_manager_update(StateManager *state_manager) {
 int state_manager_draw(StateManager *state_manager) {
     if (state_manager == NULL) return -1;
     int i;
-    for (i = MAX_STATES-1; i <= 0; --i) {
+    for (i = MAX_STATES-1; i >= 0; --i) {
         State *state = state_manager->stack[i];
         if (state != NULL) {
             if ((state->draw)() != 0) break; // block subsequent draw calls
