@@ -11,8 +11,9 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "graphics.h"
-#define HEALTH_START_VALUE 5
-
+#include "view.h"
+#include "score.h"
+#define HEALTH_START_VALUE 1
 // defines which tank, the game will support only two tanks (1 vs 1)
 typedef enum {LEFT_TANK, RIGHT_TANK} Tank_id;
 
@@ -29,6 +30,7 @@ typedef struct{
 	Terrain terrain;  // the background
 	u16* gfx_tank;  // pointer to the allocated sprite
 	int sprite_id;  // 0 or 1
+	int angle;
  }Tank;
 
 /*!
@@ -53,7 +55,10 @@ int tank_init(Tank*,Tank_id, int x, Terrain);
  * @param x position of the new location
  * @return 0 if success
  */
-int tank_move(Tank* tank, int x);
+int tank_move(Tank* tank, bool forward);
+
+int tank_angle(Tank* tank, bool up);
+
 
 /*!
  *@brief shoots a cannon ball from the tank number (id),
@@ -62,19 +67,20 @@ int tank_move(Tank* tank, int x);
  * @param power of the shot [0-100]
  * @param angle of shot [0-90], relative to which tank, they look to different directions
  */
-void tank_shoot(Tank shooter, Tank target,int angle, Terrain terrain);
+void tank_shoot(Tank shooter, Tank* target, Terrain terrain);
 
 /*!
  *@brief when the tank gets hit, it looses health
  *       and might end the game
  * @param tank that is going to get hit
  */
-void tank_got_hit(Tank tank);
+void tank_got_hit(Tank* tank);
 
 /*!
  * @brief draws the tank
  * @param tank to be drawn
  */
 void draw_tank(Tank tank);
+
 
 #endif /* TANKS_H_ */

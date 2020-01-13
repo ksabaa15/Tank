@@ -5,17 +5,18 @@
  *      Author: Karim
  */
 #include "graphics.h"
-
-
 void configure_background_main(){
 
 	// configure Vram for main engine
 	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
 	// configure the display controller register
-	REG_DISPCNT= MODE_0_2D | DISPLAY_BG0_ACTIVE;
+	REG_DISPCNT= MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_BG1_ACTIVE;
 	// configure the background controller
-	BGCTRL[0]= BG_32x32 | BG_COLOR_256 |
+	BGCTRL[0]= BG_64x32 | BG_COLOR_256 |
 			BG_MAP_BASE(0) | BG_TILE_BASE(1);
+	BGCTRL[1]= BG_32x32 | BG_COLOR_256 |
+				BG_MAP_BASE(2) | BG_TILE_BASE(2);
+
 
 
 }
@@ -23,9 +24,9 @@ void draw_background_main(Illustration background){
 	// copying palette
 	dmaCopy(background.palette,(void*)BG_PALETTE,background.palette_length);
 	// copying tiles
-	dmaCopy(background.tiles,(void*)BG_TILE_RAM(1),background.tiles_length);
+	dmaCopy(background.tiles,(void*)BG_TILE_RAM(2),background.tiles_length);
 	// copying map
-	dmaCopy(background.map,(void*)BG_MAP_RAM(0),background.map_length);
+	dmaCopy(background.map,(void*)BG_MAP_RAM(2),background.map_length);
 
 }
 
@@ -72,9 +73,7 @@ void* allocate_sprite_main(SpriteSize s, Illustration sprite, int *id){
 void deallocate_sprite_main(void* gfx){
 	oamFreeGfx(&oamMain, gfx);
 }
-void deallocate_sprite_sub(void * gfx){
-	oamFreeGfx(&oamSub,gfx);
-}
+
 
 void* allocate_sprite_sub(SpriteSize s, Illustration sprite, int *id){
 	// allocate sprite
@@ -90,8 +89,11 @@ void* allocate_sprite_sub(SpriteSize s, Illustration sprite, int *id){
 	return gfx_sub;
 }
 
+void deallocate_sprite_sub(void * gfx){
+	oamFreeGfx(&oamSub,gfx);
+}
 
-void set_sprite_main(const void* gfx, int id,int x, int y){
+void set_sprite_main(const void* gfx, int id,int x, int y,bool hide){
 	oamSet(&oamMain,
 						id,
 						x,y,
@@ -102,7 +104,7 @@ void set_sprite_main(const void* gfx, int id,int x, int y){
 						gfx,
 						-1,
 						false,
-						false,
+						hide,
 						false, false,
 						false
 						);
@@ -116,7 +118,7 @@ void set_sprite_sub(const void* gfx_sub, int id,int x, int y){
 						x,y,
 						0,
 						0,
-						SpriteSize_32x32,
+						SpriteSize_32x64,
 						SpriteColorFormat_256Color,
 						gfx_sub,
 						-1,

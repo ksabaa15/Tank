@@ -10,9 +10,8 @@
 
 #include "graphics.h"
 #include "background.h"
-
 // different terrain, we support only the flat one for now
-typedef enum { FLAT_TERRAIN } Terrain_name;
+typedef enum { DESERT } Terrain_name;
 
 /* abstraction encapsulating all the needed information about a background, the illustration (palette, tiles etc..),
 *  and a function describing the behavior of the ground ( to be used for the movement of the tanks)
@@ -20,6 +19,7 @@ typedef enum { FLAT_TERRAIN } Terrain_name;
 typedef struct{
 	Illustration background;
 	int (*func)(int x);
+	int max_x
 }Terrain;
 
 

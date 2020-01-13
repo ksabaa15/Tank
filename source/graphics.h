@@ -9,6 +9,7 @@
 #define GRAPHICS_H_
 
 #include <nds.h>
+#include <string.h>
 /*
  * Structure encapsulating all the needed informations need to
  * draw the illustration (background or sprite) on the screen,
@@ -79,7 +80,7 @@ void deallocate_sprite_sub(void* gfx);
 /*
  *
  */
-void set_sprite_main(const void* gfx, int id,int x, int y);
+void set_sprite_main(const void* gfx, int id,int x, int y, bool hide);
 void set_sprite_sub(const void* gfx, int id,int x, int y);
 
 void draw_sprite_main();

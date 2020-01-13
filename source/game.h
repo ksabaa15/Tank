@@ -15,7 +15,17 @@
 #include "tanks.h"
 #include "sound.h"
 #include <nds.h>
+#include "view.h"
+#include "sub_background.h"
+#include "graphics.h"
+#include "numbers.h"
+#include "score.h"
+#include "cannon_ball.h"
+
 extern State STATE_GAME;
+extern Terrain terrain;
+extern Tank tank_green, tank_red;
+extern bool turn_player;
 
 int init_game();
 int deinit_game();
