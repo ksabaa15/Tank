@@ -38,5 +38,5 @@ double x_cannon_ball,y_cannon_ball;
  int deinit_cannon();
  int update_cannon();
  int draw_cannon();
- double angle_to_hit_green(int x_green,int x_red);
+ double angle_to_hit_green(int x_green,int x_red, int level);
 #endif /* CANNON_BALL_H_ */

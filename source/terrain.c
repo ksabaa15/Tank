@@ -5,7 +5,7 @@
  *      Author: Karim
  */
 #include "terrain.h"
-#define wall_height 70
+#define wall_height 50
 #define ground_height 140
 
 Illustration desert_terrain_background = {(void*)backgroundPal, (void*)backgroundTiles,(void*)backgroundMap, backgroundPalLen, backgroundTilesLen, backgroundMapLen };
@@ -20,12 +20,12 @@ void terrain_init(Terrain* terrain,Terrain_name name){
 	if(name == DESERT){
 		terrain->background= desert_terrain_background;
 		terrain->func= desert_terrain_func;
-		terrain->max_x=256;
+		terrain->max_x=240;
 	}
 }
 void terrain_draw(Terrain terrain){
 		// wall drawing
-		BG_PALETTE[255]=ARGB16(1,20,20,20);
+		BG_PALETTE[255]=ARGB16(1,18,18,18);
 		memset(&BG_TILE_RAM(1)[32],255,64);
 		int i,j;
 		for(i=0; i<24; ++i){

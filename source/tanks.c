@@ -52,12 +52,12 @@ int tank_move(Tank* tank, bool forward ){
 }
 int tank_angle(Tank* tank, bool up){
 	if(up){
-		tank->angle+=2;
+		tank->angle+=4;
 	}else{
-		tank->angle-=2;
+		tank->angle-=4;
 	}
-	if(tank->angle>70){
-		tank->angle=70;
+	if(tank->angle>90){
+		tank->angle=90;
 	}
 	if(tank->angle<30){
 		tank->angle=30;

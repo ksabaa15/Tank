@@ -58,7 +58,7 @@ int init_cannon(){
 	gfx_cannon_ball= allocate_sprite_main(SpriteSize_32x32, cannon_ball_sprite, &id_cannon_ball_sprite);
 	gfx_explosion=allocate_sprite_main(SpriteSize_32x32, explosion_sprite, &id_explosion_sprite);
 	cannon_sound();
-	power =6;
+	power =7;
 	x_force = power*cos(radians(angle_i));
 	y_force = power*sin(radians(angle_i));
 	gravity =0.1;
@@ -76,10 +76,14 @@ int deinit_cannon(){
 }
 int update_cannon(){
 	if(((y_cannon_ball)+16)<terrain_i.func(x_cannon_ball)){
-		set_sprite_main(gfx_cannon_ball, id_cannon_ball_sprite,(int)x_cannon_ball,(int)y_cannon_ball,false);
+		if(y_cannon_ball<0){
+			set_sprite_main(gfx_cannon_ball, id_cannon_ball_sprite,(int)x_cannon_ball,(int)y_cannon_ball,true);
+		}else{
+			set_sprite_main(gfx_cannon_ball, id_cannon_ball_sprite,(int)x_cannon_ball,(int)y_cannon_ball,false);
+		}
 
 		if(shooter_i.id==RIGHT_TANK){
-			if(x_cannon_ball<0){
+			if(x_cannon_ball<0 && !right_tank_hidden){
 				x=x_cannon_ball;
 				x_cannon_ball=256;
 				switch_bg_view();
@@ -87,7 +91,7 @@ int update_cannon(){
 			}
 			x_cannon_ball -= x_force;
 		}else{
-			if(x_cannon_ball>256){
+			if(x_cannon_ball>256 && !left_tank_hidden){
 				x = x_cannon_ball;
 				x_cannon_ball=0;
 				switch_bg_view();
@@ -106,9 +110,14 @@ int update_cannon(){
 			set_sprite_main(gfx_explosion, id_explosion_sprite,(int)x_cannon_ball-2,(int)y_cannon_ball-8,false);
 
 			//tank_got_hit_callback_i(target_i);
-			if(x_cannon_ball > (target_i->x-10 ) && x_cannon_ball <(target_i->x+20)&&
-					((!right_tank_hidden&&target_i->id==RIGHT_TANK) || (!left_tank_hidden&&target_i->id==LEFT_TANK)))
-						tank_got_hit_callback_i(target_i);
+			if(target_i->id==RIGHT_TANK &&x_cannon_ball > (target_i->x-5 ) && x_cannon_ball <(target_i->x+25)&&
+								((!right_tank_hidden&&target_i->id==RIGHT_TANK) || (!left_tank_hidden&&target_i->id==LEFT_TANK)))
+									tank_got_hit_callback_i(target_i);
+
+			if(target_i->id==LEFT_TANK &&x_cannon_ball > (target_i->x-5 ) && x_cannon_ball <(target_i->x+20)&&
+								((!right_tank_hidden&&target_i->id==RIGHT_TANK) || (!left_tank_hidden&&target_i->id==LEFT_TANK)))
+									tank_got_hit_callback_i(target_i);
+
 
 		}
 
@@ -128,10 +137,10 @@ int draw_cannon(){
 	return 0;
 }
 
-double angle_to_hit_green(int x_green,int x_red){
+double angle_to_hit_green(int x_green,int x_red, int level){
 	double y_cannon_ball,x_cannon_ball;
 	int angle;
-	double power =6;
+	double power =7;
 	double gravity=0.1;
 	double x_force, y_force;
 	int min_diff=2000;
@@ -152,8 +161,13 @@ double angle_to_hit_green(int x_green,int x_red){
 				min_diff_angle = angle;
 			}
 	}
-	return min_diff_angle;
-
+	int r= rand();
+	if(r%3==0)
+		return min_diff_angle;
+	if(r%3==1)
+		return min_diff_angle + 5*level;
+	if(r%3==2)
+		return min_diff_angle - 5*level;
 }
 
 

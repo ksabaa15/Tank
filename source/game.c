@@ -46,7 +46,7 @@ int deinit_game() {
 int update_game() {
 
 	if(turn_player){
-		if(keys==KEY_A){
+		if(touch.px>100){
 			tank_shoot(tank_green,&tank_red, terrain);
 			turn_player=false;
 		}
@@ -79,7 +79,7 @@ int update_game() {
 			draw_sprite_main();
 		}
 
-		tank_red.angle =  angle_to_hit_green(tank_green.x,tank_red.x);
+		tank_red.angle =  angle_to_hit_green(tank_green.x,tank_red.x,0);
 		tank_shoot(tank_red,&tank_green, terrain);
 		turn_player = true;
 	}
