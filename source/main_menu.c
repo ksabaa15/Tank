@@ -5,6 +5,7 @@
  *      Author: Ulysse
  */
 #include "main_menu.h"
+#include "difficulty_menu.h"
 #include "button.h"
 #include "input.h"
 #include "state_manager.h"
@@ -28,13 +29,13 @@ Button buttonCPU;
 void play2P() {
 	state_manager_pop(&state_manager);
 	state_manager_push(&state_manager, &STATE_GAME);
-	//TODO: use 2 players mode
+	//use 2 players mode
+	ai_mode = false;
 }
 
 void playCPU() {
 	state_manager_pop(&state_manager);
-	state_manager_push(&state_manager, &STATE_GAME);
-	//TODO: use AI mode
+	state_manager_push(&state_manager, &STATE_DIFFICULTY_MENU);
 }
 
 int init_main_menu() {
