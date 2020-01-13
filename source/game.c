@@ -5,6 +5,7 @@
  *      Author: Karim
  */
 #include "game.h"
+#include "pause_menu.h"
 #include <stdlib.h>
 
 State STATE_GAME = {
@@ -44,6 +45,11 @@ int deinit_game() {
 }
 
 int update_game() {
+
+	if (touch.px >= 204 && touch.py <= 22) {
+		state_manager_push(&state_manager, &STATE_PAUSE_MENU);
+		return 0;
+	}
 
 	if(turn_player){
 		if(touch.px>100){
