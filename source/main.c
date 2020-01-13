@@ -16,7 +16,6 @@
 int main(void) {
 
 	// initialize state manager
-	StateManager state_manager;
 	state_manager_init(&state_manager);
 
 	// push game state

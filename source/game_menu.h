@@ -5,6 +5,8 @@
  *      Author: Ulysse
  */
 #pragma once
+#ifndef GAME_MENU_H_
+#define GAME_MENU_H_
 
 /*!
  * @brief Takes control of the touch screen and posts the game menu
@@ -15,5 +17,7 @@
  * 		  (resume, restart, exit)
  */
 int game_menu();
+
+#endif /* GAME_MENU_H_ */
 
 

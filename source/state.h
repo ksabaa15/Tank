@@ -5,6 +5,8 @@
  *      Author: Ulysse
  */
 #pragma once
+#ifndef STATE_H_
+#define STATE_H_
 
 typedef struct {
     // prevent subsequent calls for older states by returning anything != 0
@@ -14,4 +16,6 @@ typedef struct {
     int (*update)();
 	int (*draw)();
 } State;
+
+#endif /* STATE_H_ */
 

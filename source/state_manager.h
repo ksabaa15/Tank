@@ -5,6 +5,8 @@
  *      Author: Ulysse
  */
 #pragma once
+#ifndef STATE_MANAGER_H_
+#define STATE_MANAGER_H_
 
 #include "state.h"
 
@@ -14,6 +16,7 @@ typedef struct {
     State *stack[MAX_STATES];
 } StateManager;
 
+StateManager state_manager;
 /*!
  * @brief Initializes a state manager
  * @param state_manager pointer to the state stack
@@ -50,3 +53,5 @@ int state_manager_update(StateManager *state_manager);
  */
 int state_manager_draw(StateManager *state_manager);
 
+
+#endif /* STATE_MANAGER_H_ */

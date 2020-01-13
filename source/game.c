@@ -5,6 +5,7 @@
  *      Author: Karim
  */
 #include "game.h"
+#include <stdlib.h>
 
 State STATE_GAME = {
 	&init_game,
@@ -13,25 +14,25 @@ State STATE_GAME = {
 	&draw_game
 };
 
+Terrain terrain;
+Tank tank_green, tank_red;
+bool turn_player;
+Illustration sub_background = { (void*)sub_backgroundPal, (void*)sub_backgroundTiles, (void*)sub_backgroundMap,
+		sub_backgroundPalLen, sub_backgroundTilesLen, sub_backgroundMapLen};
+int h =1;
 int init_game() {
-
-	Illustration background = { backgroundPal, backgroundTiles,backgroundMap, backgroundPalLen, backgroundTilesLen, backgroundMapLen };
-
-	set_background_main_screen(background);
-	set_background_sub_screen(background);
-
-	int id_tank, id_target_mark;
-	Illustration tank = { spritesPal, (void*)&((void*)spritesTiles)[1024],NULL, spritesPalLen, spritesTilesLen/2,0 };
-	Illustration target_mark = { spritesPal, (void*)spritesTiles,NULL, spritesPalLen, spritesTilesLen/2,0 };
-
+	configure_background_main();
+	configure_background_sub();
 	configure_sprites_main();
-
-	u16* gfx_tank1 = allocate_sprite_main(SpriteSize_32x32,tank,&id_tank);
-	u16* gfx_target_mark = allocate_sprite_main(SpriteSize_32x32,target_mark,&id_target_mark);
-
-	set_sprite_main(gfx_tank1, id_tank, 10, 110,false);
-	set_sprite_main(gfx_target_mark, id_target_mark, 25, 108,false);
-
+	configure_sprites_sub();
+	configure_sound();
+	music_sound();
+	terrain_init(&terrain,DESERT);
+	init_bg_view();
+	tank_init(&tank_green,LEFT_TANK, 170, terrain);
+	tank_init(&tank_red,RIGHT_TANK, 150, terrain);
+	turn_player=true;
+	init_score();
 	return 0;
 }
 
@@ -44,14 +45,55 @@ int deinit_game() {
 
 int update_game() {
 
-	// TODO:
+	if(turn_player){
+		if(touch.px>100){
+			tank_shoot(tank_green,&tank_red, terrain);
+			turn_player=false;
+		}
+		if(keys==KEY_UP){
+			tank_green.angle+=5;
+			if(tank_green.angle>70){
+				tank_green.angle =70;
+			}
+		}
+		if(keys==KEY_DOWN){
+			tank_green.angle -=5;
+			if(tank_green.angle <40){
+				tank_green.angle =40;
+			}
+		}
+		if(keys==KEY_RIGHT){
+			tank_move(&tank_green, true);
+		}
+		if(keys==KEY_LEFT){
+			tank_move(&tank_green, false);
+		}
+	}else{
+		int i;
+		int forward = rand()%2;
+		for(i=0; i<20;++i){
+			swiWaitForVBlank();
+			swiWaitForVBlank();
+			tank_move(&tank_red, forward);
+			draw_tank(tank_red);
+			draw_sprite_main();
+		}
+
+		tank_red.angle =  angle_to_hit_green(tank_green.x,tank_red.x,0);
+		tank_shoot(tank_red,&tank_green, terrain);
+		turn_player = true;
+	}
+	update_score();
 
 	return 0;
 }
 
 int draw_game() {
-
-	// TODO:
-
+	terrain_draw(terrain);
+	draw_tank(tank_green);
+	draw_tank(tank_red);
+	draw_sprite_main();
+	draw_background_sub(sub_background);
+	draw_sprite_sub();
 	return 0;
 }
