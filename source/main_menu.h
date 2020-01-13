@@ -17,4 +17,16 @@
  *        where they will have to choose between playing aagainst the computer
  *        or other.
  */
-int main_menu();
+
+#include "state.h"
+#include "graphics.h"
+
+#include "background.h"
+#include "sprites.h"
+
+extern State STATE_MAIN_MENU;
+
+int init_main_menu();
+int deinit_main_menu();
+int update_main_menu();
+int draw_main_menu();
