@@ -26,6 +26,7 @@ int init_game() {
 	configure_sprites_main();
 	configure_sprites_sub();
 	configure_sound();
+	music_sound();
 	terrain_init(&terrain,DESERT);
 	init_bg_view();
 	tank_init(&tank_green,LEFT_TANK, 170, terrain);

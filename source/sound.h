@@ -20,5 +20,6 @@ void cannon_sound();
 
 void explosion_sound();
 
+void music_sound();
 
 #endif /* SOUND_H_ */
