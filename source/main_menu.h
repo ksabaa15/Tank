@@ -23,7 +23,6 @@
 #include "state.h"
 #include "graphics.h"
 
-#include "background.h"
 #include "sprites.h"
 
 extern State STATE_MAIN_MENU;
