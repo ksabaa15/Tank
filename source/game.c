@@ -52,7 +52,7 @@ int update_game() {
 	}
 
 	if(turn_player){
-		if(touch.px>100){
+		if((down & KEY_TOUCH) && (touch.px>100)) {
 			tank_shoot(tank_green,&tank_red, terrain);
 			turn_player=false;
 		}
