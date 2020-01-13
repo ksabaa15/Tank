@@ -21,6 +21,9 @@ bool turn_player;
 Illustration sub_background = { (void*)sub_backgroundPal, (void*)sub_backgroundTiles, (void*)sub_backgroundMap,
 		sub_backgroundPalLen, sub_backgroundTilesLen, sub_backgroundMapLen};
 int h =1;
+
+bool ai_mode;
+
 int init_game() {
 	configure_background_main();
 	configure_background_sub();
@@ -54,7 +57,7 @@ int update_game() {
 	if(turn_player){
 		if((down & KEY_TOUCH) && (touch.px>100)) {
 			tank_shoot(tank_green,&tank_red, terrain);
-			turn_player=false;
+			if (ai_mode) { turn_player=false; } // let AI play
 		}
 		if(keys==KEY_UP){
 			tank_green.angle+=5;

@@ -26,6 +26,7 @@ extern State STATE_GAME;
 extern Terrain terrain;
 extern Tank tank_green, tank_red;
 extern bool turn_player;
+extern bool ai_mode;
 
 int init_game();
 int deinit_game();
