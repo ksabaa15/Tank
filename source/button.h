@@ -9,15 +9,8 @@
 typedef struct {
     int x; int y;
     int width; int height;
-    char* label;
     void (*onPress)();
 } Button;
-
-/*!
- * @brief Draws a button
- * @param button pointer to the button to draw
- */
-void button_draw(Button *button);
 
 /*!
  * @brief Tests if a button was touched
