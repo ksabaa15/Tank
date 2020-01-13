@@ -10,6 +10,7 @@
 #include <nds.h>
 
 unsigned keys;
+unsigned down;
 touchPosition touch;
 
 /*!

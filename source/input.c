@@ -10,6 +10,7 @@
 int poll_input() {
 		scanKeys();
 		keys=keysHeld();
+		down=keysDown();
 		swiWaitForVBlank();
 		touchRead(&touch);
     return 0;
