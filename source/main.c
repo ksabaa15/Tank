@@ -6,9 +6,12 @@
  */
 
 #include <stdio.h>
-#include "game.h"
+
 #include "input.h"
 #include "state_manager.h"
+
+#include "game.h"
+#include "main_menu.h"
 
 int main(void) {
 
@@ -17,7 +20,7 @@ int main(void) {
 	state_manager_init(&state_manager);
 
 	// push game state
-	state_manager_push(&state_manager, &STATE_GAME);
+	state_manager_push(&state_manager, &STATE_MAIN_MENU);
 
 	while (1) {
 		// game loop
