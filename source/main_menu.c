@@ -28,11 +28,13 @@ Button buttonCPU;
 void play2P() {
 	state_manager_pop(&state_manager);
 	state_manager_push(&state_manager, &STATE_GAME);
+	//TODO: use 2 players mode
 }
 
 void playCPU() {
 	state_manager_pop(&state_manager);
 	state_manager_push(&state_manager, &STATE_GAME);
+	//TODO: use AI mode
 }
 
 int init_main_menu() {
