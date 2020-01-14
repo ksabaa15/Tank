@@ -34,10 +34,11 @@ int tank_move(Tank* tank, bool forward ){
 	if(tank==NULL){
 		return -1;
 	}
-	if((forward &&(tank->id== LEFT_TANK))||(!forward &&!(tank->id== LEFT_TANK)))
+	if(forward)	//if((forward &&(tank->id== LEFT_TANK))||(!forward &&!(tank->id== LEFT_TANK)))
 		tank->x+=3;
 	else
 		tank->x-=3;
+
 	if(tank->x >= tank->terrain.max_x-32){
 		tank->x=tank->terrain.max_x-32;
 	}

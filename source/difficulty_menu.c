@@ -30,21 +30,21 @@ void easy() {
 	state_manager_pop(&state_manager);
 	state_manager_push(&state_manager, &STATE_GAME);
 	ai_mode = true;
-	//TODO: set difficulty 
+	difficulty=2;
 }
 
 void medium() {
 	state_manager_pop(&state_manager);
 	state_manager_push(&state_manager, &STATE_GAME);
 	ai_mode = true;
-	//TODO: set difficulty 
+	difficulty=1;
 }
 
 void hard() {
 	state_manager_pop(&state_manager);
 	state_manager_push(&state_manager, &STATE_GAME);
 	ai_mode = true;
-	//TODO: set difficulty 
+	difficulty=0;
 }
 
 int init_difficulty_menu() {

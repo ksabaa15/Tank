@@ -7,7 +7,7 @@
 #include "game.h"
 #include "pause_menu.h"
 #include <stdlib.h>
-
+#include "difficulty_menu.h"
 State STATE_GAME = {
 	&init_game,
 	&deinit_game,
@@ -18,6 +18,9 @@ State STATE_GAME = {
 Terrain terrain;
 Tank tank_green, tank_red;
 bool turn_player;
+bool turn_green;
+Tank* playing_tank;
+Tank* not_playing_tank;
 Illustration sub_background = { (void*)sub_backgroundPal, (void*)sub_backgroundTiles, (void*)sub_backgroundMap,
 		sub_backgroundPalLen, sub_backgroundTilesLen, sub_backgroundMapLen};
 int h =1;
@@ -36,6 +39,7 @@ int init_game() {
 	tank_init(&tank_green,LEFT_TANK, 170, terrain);
 	tank_init(&tank_red,RIGHT_TANK, 150, terrain);
 	turn_player=true;
+	turn_green=true;
 	init_score();
 	return 0;
 }
@@ -55,27 +59,36 @@ int update_game() {
 	}
 
 	if(turn_player){
-		if((down & KEY_TOUCH) && (touch.px>100)) {
-			tank_shoot(tank_green,&tank_red, terrain);
+		if(turn_green){
+			playing_tank= &tank_green;
+			not_playing_tank= &tank_red;
+		}else{
+			playing_tank= &tank_red;
+			not_playing_tank= &tank_green;
+		}
+		if(keys==KEY_A) {//(down & KEY_TOUCH) && (touch.px>100)
+			tank_shoot(*playing_tank,not_playing_tank, terrain);
 			if (ai_mode) { turn_player=false; } // let AI play
+			else{turn_green = !turn_green;}
+
 		}
 		if(keys==KEY_UP){
-			tank_green.angle+=5;
-			if(tank_green.angle>70){
-				tank_green.angle =70;
+			playing_tank->angle+=5;
+			if(playing_tank->angle>70){
+				playing_tank->angle =70;
 			}
 		}
 		if(keys==KEY_DOWN){
-			tank_green.angle -=5;
-			if(tank_green.angle <40){
-				tank_green.angle =40;
+			playing_tank->angle -=5;
+			if(playing_tank->angle <40){
+				playing_tank->angle =40;
 			}
 		}
 		if(keys==KEY_RIGHT){
-			tank_move(&tank_green, true);
+			tank_move(playing_tank, true);
 		}
 		if(keys==KEY_LEFT){
-			tank_move(&tank_green, false);
+			tank_move(playing_tank, false);
 		}
 	}else{
 		int i;
@@ -88,7 +101,7 @@ int update_game() {
 			draw_sprite_main();
 		}
 
-		tank_red.angle =  angle_to_hit_green(tank_green.x,tank_red.x,0);
+		tank_red.angle =  angle_to_hit_green(tank_green.x,tank_red.x,difficulty);
 		tank_shoot(tank_red,&tank_green, terrain);
 		turn_player = true;
 	}

@@ -13,7 +13,7 @@
 #include "graphics.h"
 
 #include "sprites.h"
-
+int difficulty;
 extern State STATE_DIFFICULTY_MENU;
 
 int init_difficulty_menu();
