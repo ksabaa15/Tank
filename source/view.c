@@ -12,6 +12,8 @@
 void init_bg_view(){
 	left_tank_hidden =false;
 	right_tank_hidden = true;
+	REG_BG0HOFS = 0;
+	REG_BG1HOFS = 0;
 }
 void switch_bg_view(){
 	if(left_tank_hidden){

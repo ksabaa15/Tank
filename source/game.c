@@ -23,7 +23,6 @@ Tank* playing_tank;
 Tank* not_playing_tank;
 Illustration sub_background = { (void*)sub_backgroundPal, (void*)sub_backgroundTiles, (void*)sub_backgroundMap,
 		sub_backgroundPalLen, sub_backgroundTilesLen, sub_backgroundMapLen};
-int h =1;
 
 bool ai_mode;
 

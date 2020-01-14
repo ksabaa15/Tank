@@ -57,6 +57,10 @@ int init_difficulty_menu() {
 	draw_background_main(background);
 	draw_background_sub(subBackground);
 
+	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|1;
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
+
+
 	int w = 140;
 	int h = 36;
 	buttonEasy.x = 256 / 2 - w / 2; buttonEasy.y = 32;
@@ -74,6 +78,9 @@ int init_difficulty_menu() {
 	return 0;
 }
 int deinit_difficulty_menu() {
+	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|0;
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|1;
+
 	return 0;
 }
 int update_difficulty_menu() {

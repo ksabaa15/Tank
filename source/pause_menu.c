@@ -43,8 +43,9 @@ int init_pause_menu() {
 
 	oamDisable(&oamMain);
 	oamDisable(&oamSub);
-	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
+
 	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|1;
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
 
 	draw_background_main(background);
 	draw_background_sub(subBackground);
@@ -62,8 +63,8 @@ int init_pause_menu() {
 	return 0;
 }
 int deinit_pause_menu() {
-	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|1;
-	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
+	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|0;
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|1;
 
 	oamEnable(&oamMain);
 	oamEnable(&oamSub);
