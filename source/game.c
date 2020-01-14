@@ -41,6 +41,7 @@ int init_game() {
 	turn_player=true;
 	turn_green=true;
 	init_score();
+	init_score_sprites();
 	return 0;
 }
 
@@ -70,19 +71,12 @@ int update_game() {
 			tank_shoot(*playing_tank,not_playing_tank, terrain);
 			if (ai_mode) { turn_player=false; } // let AI play
 			else{turn_green = !turn_green;}
-
 		}
 		if(keys==KEY_UP){
-			playing_tank->angle+=5;
-			if(playing_tank->angle>70){
-				playing_tank->angle =70;
-			}
+			tank_angle(playing_tank,true);
 		}
 		if(keys==KEY_DOWN){
-			playing_tank->angle -=5;
-			if(playing_tank->angle <40){
-				playing_tank->angle =40;
-			}
+			tank_angle(playing_tank,false);
 		}
 		if(keys==KEY_RIGHT){
 			tank_move(playing_tank, true);

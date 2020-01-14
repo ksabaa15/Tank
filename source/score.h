@@ -14,6 +14,7 @@
 
 
 void init_score();
+void init_score_sprites();
 void player1_loses_score();
 void player2_loses_score();
 

@@ -41,8 +41,11 @@ int init_pause_menu() {
 	Illustration background = { pause_menu_backgroundPal, pause_menu_backgroundTiles, pause_menu_backgroundMap, pause_menu_backgroundPalLen, pause_menu_backgroundTilesLen, pause_menu_backgroundMapLen };
 	Illustration subBackground = { pause_menu_sub_backgroundPal, pause_menu_sub_backgroundTiles, pause_menu_sub_backgroundMap, pause_menu_sub_backgroundPalLen, pause_menu_sub_backgroundTilesLen, pause_menu_sub_backgroundMapLen };
 
-	configure_background_main();
-	configure_background_sub();
+	oamDisable(&oamMain);
+	oamDisable(&oamSub);
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
+	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|1;
+
 	draw_background_main(background);
 	draw_background_sub(subBackground);
 
@@ -59,6 +62,11 @@ int init_pause_menu() {
 	return 0;
 }
 int deinit_pause_menu() {
+	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|1;
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
+
+	oamEnable(&oamMain);
+	oamEnable(&oamSub);
 	return 0;
 }
 int update_pause_menu() {

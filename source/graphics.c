@@ -112,7 +112,7 @@ void set_sprite_main(const void* gfx, int id,int x, int y,bool hide){
 }
 
 
-void set_sprite_sub(const void* gfx_sub, int id,int x, int y){
+void set_sprite_sub(const void* gfx_sub, int id,int x, int y, bool hidden){
 	oamSet(&oamSub,
 						id,
 						x,y,
@@ -123,7 +123,7 @@ void set_sprite_sub(const void* gfx_sub, int id,int x, int y){
 						gfx_sub,
 						-1,
 						false,
-						false,
+						hidden,
 						false, false,
 						false
 						);

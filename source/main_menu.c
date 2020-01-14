@@ -48,6 +48,9 @@ int init_main_menu() {
 	draw_background_main(background);
 	draw_background_sub(subBackground);
 
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
+	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|1;
+
 	int w = 140;
 	int h = 50;
 	button2P.x = 256 / 2 - w / 2; button2P.y = 32;
@@ -61,6 +64,9 @@ int init_main_menu() {
 	return 0;
 }
 int deinit_main_menu() {
+	BGCTRL[0]= (BGCTRL[0]& 0xFFFC)|1;
+	BGCTRL[1]= (BGCTRL[1]& 0xFFFC)|0;
+
 	return 0;
 }
 int update_main_menu() {

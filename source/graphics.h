@@ -81,7 +81,7 @@ void deallocate_sprite_sub(void* gfx);
  *
  */
 void set_sprite_main(const void* gfx, int id,int x, int y, bool hide);
-void set_sprite_sub(const void* gfx, int id,int x, int y);
+void set_sprite_sub(const void* gfx, int id,int x, int y, bool hidden);
 
 void draw_sprite_main();
 void draw_sprite_sub();
