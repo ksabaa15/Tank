@@ -19,5 +19,5 @@ int init_pause_menu();
 int deinit_pause_menu();
 int update_pause_menu();
 int draw_pause_menu();
-
+void quit();
 #endif /* PAUSE_MENU_H_ */

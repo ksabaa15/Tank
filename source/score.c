@@ -5,6 +5,11 @@
  *      Author: nds
  */
 #include "score.h"
+#include "state_manager.h"
+#include "main_menu.h"
+#include "pause_menu.h"
+
+
 #define BEGINING_SCORE 4
 
 int id_number1[BEGINING_SCORE];
@@ -39,13 +44,18 @@ void player1_loses_score(){
 	--score1;
 	if(score1<0)
 		score1=0;
+	if(score1==0){
+		quit();
+	}
 }
 
 void player2_loses_score(){
 	--score2;
 	if(score2<0)
 		score2=0;
-
+	if(score2==0){
+		quit();
+	}
 }
 
 void update_score(){

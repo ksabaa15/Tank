@@ -110,11 +110,11 @@ int update_cannon(){
 			set_sprite_main(gfx_explosion, id_explosion_sprite,(int)x_cannon_ball-2,(int)y_cannon_ball-8,false);
 
 			//tank_got_hit_callback_i(target_i);
-			if(target_i->id==RIGHT_TANK &&x_cannon_ball > (target_i->x-5 ) && x_cannon_ball <(target_i->x+25)&&
+			if(target_i->id==RIGHT_TANK &&x_cannon_ball > (target_i->x-7 ) && x_cannon_ball <(target_i->x+25)&&
 								((!right_tank_hidden&&target_i->id==RIGHT_TANK) || (!left_tank_hidden&&target_i->id==LEFT_TANK)))
 									tank_got_hit_callback_i(target_i);
 
-			if(target_i->id==LEFT_TANK &&x_cannon_ball > (target_i->x-5 ) && x_cannon_ball <(target_i->x+20)&&
+			if(target_i->id==LEFT_TANK &&x_cannon_ball > (target_i->x-7 ) && x_cannon_ball <(target_i->x+25)&&
 								((!right_tank_hidden&&target_i->id==RIGHT_TANK) || (!left_tank_hidden&&target_i->id==LEFT_TANK)))
 									tank_got_hit_callback_i(target_i);
 
@@ -156,7 +156,7 @@ double angle_to_hit_green(int x_green,int x_red, int level){
 					y_cannon_ball += y_force;
 					y_force-= gravity;
 		}
-			if(abs(x_cannon_ball-(x_green+5))<min_diff){
+			if(abs(x_cannon_ball-(x_green+7))<min_diff){
 				min_diff=abs(x_cannon_ball-(x_green+5));
 				min_diff_angle = angle;
 			}
